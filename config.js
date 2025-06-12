@@ -1,5 +1,6 @@
 module.exports = {
-    catalogUrl: null,
+    // catalogUrl: "http://localhost:8181",
+    catalogUrl: "http://0.0.0.0:8008//catalog.json",
     catalogTitle: "STAC Browser",
     allowExternalAccess: true, // Must be true if catalogUrl is not given
     allowedDomains: [],
@@ -7,6 +8,8 @@ module.exports = {
     storeLocale: true,
     locale: "en",
     fallbackLocale: "en",
+    showKeywordsInItemCards: true,
+    showKeywordsInCatalogCards: true,
     supportedLocales: [
         "de",
         "ar",
@@ -26,7 +29,8 @@ module.exports = {
 //      "pt-BR"
         "id"
     ],
-    apiCatalogPriority: null,
+    maxItemsPerPage: 4000
+/*    apiCatalogPriority: null,
     useTileLayerAsFallback: true,
     displayGeoTiffByDefault: false,
     buildTileUrlTemplate: ({href, asset}) => "https://tiles.rdnt.io/tiles/{z}/{x}/{y}@2x?url=" + encodeURIComponent(href),
@@ -49,5 +53,5 @@ module.exports = {
     requestQueryParameters: {},
     socialSharing: ['email', 'bsky', 'mastodon', 'x'],
     preprocessSTAC: null,
-    authConfig: null
+    authConfig: null*/
 };
