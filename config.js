@@ -1,6 +1,6 @@
 module.exports = {
     // catalogUrl: "http://localhost:8181",
-    catalogUrl: "http://0.0.0.0:8008//catalog.json",
+    catalogUrl: "http://localhost:8008/catalog.json",
     catalogTitle: "STAC Browser",
     allowExternalAccess: true, // Must be true if catalogUrl is not given
     allowedDomains: [],
