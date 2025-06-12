@@ -142,6 +142,7 @@
   },
   "items": {
     "filter": "Filters",
+    "speciesfilterPlaceholder": "Filter items by species name",
     "hideFilter": "Hide Filters",
     "noTime": "No time given",
     "noneAvailableForCollection": "No items available for this collection.",

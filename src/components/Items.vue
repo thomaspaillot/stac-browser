@@ -25,6 +25,8 @@
       </b-collapse>
     </template>
 
+    <SearchBox v-model="searchTerm" class="catalog-filter mb-2" :placeholder="speciesfilterPlaceholder"/>
+
     <section class="list">
       <Loading v-if="loading" fill top />
       <b-card-group v-if="chunkedItems.length > 0" columns>
@@ -59,7 +61,8 @@ export default {
     SearchFilter: () => import('./SearchFilter.vue'),
     Loading,
     Pagination,
-    SortButtons: () => import('./SortButtons.vue')
+    SortButtons: () => import('./SortButtons.vue'),
+    SearchBox: () => import('./SearchBox.vue')
   },
   props: {
     items: {
@@ -84,7 +87,7 @@ export default {
     },
     showFilters: {
       type: Boolean,
-      default: false
+      default: true
     },
     apiFilters: {
       type: Object,
@@ -107,7 +110,9 @@ export default {
     return {
       shownItems: this.chunkSize,
       filtersOpen: this.showFilters,
-      sort: 0
+      sort: 0,
+      searchTerm: '',
+      filteredItems : null
     };
   },
   computed: {
@@ -117,7 +122,11 @@ export default {
         return this.count;
       }
       else if (!this.api && this.items.length > 0) {
-        return this.items.length;
+        if (this.filteredItems) {
+          return this.filteredItems.length
+        } else {
+          return this.items.length;
+        }
       }
       return null;
     },
@@ -130,8 +139,23 @@ export default {
     hasFilters() {
       return this.filterCount > 0;
     },
+    speciesfilterPlaceholder() {
+      return this.$t('items.speciesfilterPlaceholder');
+    },
     chunkedItems() {
       let items = this.items;
+
+      if (this.searchTerm) {
+        // Filter items based on `href`
+        this.filteredItems = items.filter(item => {
+          const haystack = item.href;
+          return Utils.search(this.searchTerm, haystack);
+        });
+        return this.filteredItems;
+      } else {
+        this.filteredItems = null
+      }
+
       if (!this.apiFilters.sortby && this.sort !== 0) {
         const collator = new Intl.Collator(this.uiLanguage);
         items = items.slice(0).sort((a,b) => collator.compare(STAC.getDisplayTitle(a), STAC.getDisplayTitle(b)));
