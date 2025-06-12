@@ -10,7 +10,7 @@
         <b-badge v-for="format in fileFormats" :key="format" variant="secondary" class="mr-1 mt-1 fileformat">{{ format | formatMediaType }}</b-badge>
         <template v-if="hasDescription">{{ data.properties.description | summarize }}</template>
       </b-card-text>
-      <Keywords v-if="showKeywordsInItemCards && keywords.length > 0" :keywords="keywords" variant="primary" center />
+      <Keywords v-if="showKeywordsInItemCards && keywords.length > 0" :keywords="keywords" variant="primary" />
       <b-card-text>
         <small class="text-muted">
           <template v-if="extent">{{ extent | formatTemporalExtent }}</template>
@@ -99,8 +99,6 @@ export default {
 <style lang="scss">
 #stac-browser {
   .item-card {
-    text-align: center;
-
     &.deprecated {
       opacity: 0.7;
 
@@ -137,11 +135,12 @@ export default {
       width: auto;
       height: auto;
       max-width: 100%;
-      max-height: 200px;
+      max-height: 80px;
+      margin: 1.25rem 1.25rem 0;
+      border-radius: 0.25rem;
     }
 
     .card-body {
-      text-align: center;
       position: relative;
     }
   }

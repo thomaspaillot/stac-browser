@@ -10,7 +10,7 @@
         <b-badge v-for="format in fileFormats" :key="format" variant="secondary" class="mr-1 mt-1 fileformat">{{ format | formatMediaType }}</b-badge>
         {{ data.description | summarize }}
       </b-card-text>
-      <Keywords v-if="showKeywordsInCatalogCards && keywords.length > 0" :keywords="keywords" variant="primary" :center="!isList" />
+      <Keywords v-if="showKeywordsInCatalogCards && keywords.length > 0" :keywords="keywords" variant="primary" />
       <b-card-text v-if="temporalExtent" class="datetime"><small v-html="temporalExtent" /></b-card-text>
     </b-card-body>
     <b-card-footer>
@@ -174,7 +174,6 @@ export default {
     .catalog-card {
       box-sizing: border-box;
       margin-top: 0.5em 0;
-      text-align: center;
 
       &.queued {
         min-height: 10rem;
@@ -183,10 +182,8 @@ export default {
         width: auto;
         height: auto;
         max-width: 100%;
-        max-height: 300px;
-      }
-      .card-title {
-        text-align: center;
+        max-height: 60px;
+        padding: 1.25rem 1.25rem 0;
       }
     }
   }
